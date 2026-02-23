@@ -1,36 +1,47 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import connectDB from './lib/db.js';
-import authRoutes from './routes/auth.routes.js';
-import applicationRoutes from './routes/application.router.js';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
+  import express from 'express';
+  import dotenv from 'dotenv';
+  import connectDB from './lib/db.js';
+  import authRoutes from './routes/auth.routes.js';
+  import applicationRoutes from './routes/application.router.js';
+  import cookieParser from 'cookie-parser';
+  import cors from 'cors';
 
-dotenv.config();
+  dotenv.config();
 
-const app = express();
+  const app = express();
 
 
-// Connect to MongoDB
-connectDB();
+  // Connect to MongoDB
+  connectDB();
 
-// Middleware
-app.use(express.json());
-app.use(cookieParser());
+  // Middleware
+  app.use(express.json());
+  app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: "http://localhost:4200", // Angular dev server
-    credentials: true
-  })
-);
+  const allowedOrigins = [
+    'http://localhost:4200',
+    'https://YOUR-FRONTEND.netlify.app' // add later
+  ];
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/jobs', applicationRoutes);
+  app.use(
+    cors({
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      credentials: true
+    })
+  );
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  // Routes
+  app.use('/api/auth', authRoutes);
+  app.use('/api/jobs', applicationRoutes);
+
+  // Start the server
+  const PORT = process.env.PORT || 5001;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
