@@ -1,0 +1,105 @@
+<h2>Dashboard</h2>
+
+<button (click)="logout()">Logout</button>
+
+<hr />
+
+<h3>Add Job Application</h3>
+
+<input [(ngModel)]="company" placeholder="Company" />
+<br />
+
+<input [(ngModel)]="position" placeholder="Position" />
+<br />
+
+<select [(ngModel)]="status">
+  <option>Applied</option>
+  <option>Interview</option>
+  <option>Offer</option>
+  <option>Rejected</option>
+</select>
+<br />
+
+<select [(ngModel)]="jobType">
+  <option>Full-time</option>
+  <option>Internship</option>
+  <option>Contract</option>
+  <option>Remote</option>
+</select>
+<br />
+
+<textarea [(ngModel)]="notes" placeholder="Notes"></textarea>
+<br />
+
+<button (click)="createJob()">Add Job</button>
+
+<hr />
+<h3>Stats</h3>
+<p>Applied: {{ getCount('Applied') }}</p>
+<p>Interview: {{ getCount('Interview') }}</p>
+<p>Offer: {{ getCount('Offer') }}</p>
+<p>Rejected: {{ getCount('Rejected') }}</p>
+
+<hr />
+
+<h3>Search</h3>
+
+<input
+  type="text"
+  placeholder="Search by company..."
+  [(ngModel)]="searchText"
+  (input)="applyFilter()"
+/>
+
+<hr />
+
+<h3>Filter Applications</h3>
+
+<select [(ngModel)]="filterStatus" (change)="applyFilter()">
+  <option value="All">All</option>
+  <option value="Applied">Applied</option>
+  <option value="Interview">Interview</option>
+  <option value="Offer">Offer</option>
+  <option value="Rejected">Rejected</option>
+</select>
+
+<hr />
+
+<h3>My Applications</h3>
+
+<ul>
+  <li *ngFor="let job of filteredJobs">
+    <b>{{ job.company }}</b> — {{ job.position }}
+
+    <div *ngIf="editingJobId !== job._id">
+      ({{ job.status }} | {{ job.jobType }})
+      <br />
+      {{ job.notes }}
+      <br />
+      <button (click)="startEdit(job)">Edit</button>
+      <button (click)="deleteJob(job._id)">Delete</button>
+    </div>
+
+    <div *ngIf="editingJobId === job._id">
+      <select [(ngModel)]="job.status">
+        <option>Applied</option>
+        <option>Interview</option>
+        <option>Offer</option>
+        <option>Rejected</option>
+      </select>
+
+      <select [(ngModel)]="job.jobType">
+        <option>Full-time</option>
+        <option>Internship</option>
+        <option>Contract</option>
+        <option>Remote</option>
+      </select>
+
+      <textarea [(ngModel)]="job.notes"></textarea>
+      <br />
+
+      <button (click)="saveJob(job)">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+  </li>
+</ul>

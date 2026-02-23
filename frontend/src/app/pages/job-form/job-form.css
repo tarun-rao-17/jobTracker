@@ -1,0 +1,41 @@
+/* Job form improvements */
+
+.job-form {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.job-form .form-card {
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface), #fbfff9);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 18px;
+}
+
+@media (max-width: 980px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.field-group { display:flex; flex-direction:column; gap:8px; }
+
+label.small { font-size:0.85rem; color:var(--text-soft); font-weight:700; }
+
+.file-uploader {
+  padding: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: transparent;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.toggle-row { display:flex; gap:12px; align-items:center; }
+
+.form-actions { justify-content:flex-end; }

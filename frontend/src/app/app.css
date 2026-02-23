@@ -1,0 +1,128 @@
+/* App-wide layout helpers and UI primitives */
+
+/* Header / top bar */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  color: var(--brand-strong);
+  font-size: 1.15rem;
+}
+
+.brand .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(46,107,59,0.12), rgba(31,78,42,0.12));
+  display: inline-grid;
+  place-items: center;
+  color: var(--brand-strong);
+  font-weight: 900;
+}
+
+.app-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Common container used inside route views */
+.view-container {
+  padding: 20px 0;
+}
+
+/* Responsive grid utilities */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* single column on small screens */
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card primitive */
+.card {
+  background: linear-gradient(180deg, var(--surface), #fbfff9);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(31, 42, 31, 0.06);
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(31, 42, 31, 0.10);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-weight: 800;
+  color: var(--brand-strong);
+}
+
+.card-sub {
+  color: var(--text-soft);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Utility spacing */
+.row { display:flex; gap:12px; align-items:center; }
+.col { display:flex; flex-direction:column; gap:8px; }
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  padding: 36px 18px;
+  color: var(--text-soft);
+}
+
+/* Small helpers for inline badges and chips */
+.chip {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  background: var(--surface-muted);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight:700;
+  color: var(--brand-strong);
+}
+
+/* Form action row */
+.form-actions {
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+  margin-top: 12px;
+}
