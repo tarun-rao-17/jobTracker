@@ -20,7 +20,7 @@
 
   const allowedOrigins = [
     'http://localhost:4200',
-    'https://YOUR-FRONTEND.netlify.app' // add later
+    'https://soft-macaron-71abb2.netlify.app'
   ];
 
   app.use(
