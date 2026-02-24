@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://YOUR-BACKEND.onrender.com'
+  apiUrl: 'https://jobtracker-ek2w.onrender.com'
 };
